@@ -2,11 +2,12 @@
 	import '~/styles/app.css';
 	import '~/styles/global.scss';
 	import Topbar from '~/components/Topbar.svelte';
-	import { isLoaded, predictedColor, rootRem, userId } from '~/store';
+	import { isLoaded, predictedColor, rootRem, userId, isMobile } from '~/store';
 	import Article from '~/components/article/Article.svelte';
 	import { onMount } from 'svelte';
 	import { Spinner } from 'flowbite-svelte';
 	import GTM from '~/utils/gtm.svelte';
+	import MobileNotice from '~/components/MobileNotice.svelte';
 	import { page } from '$app/stores';
 
 	let topBarHeight = 0;
@@ -66,6 +67,9 @@
 </script>
 
 <GTM />
+{#if $isMobile}
+	<MobileNotice />
+{:else}
 <div
 	id="app"
 	style={`--min-screen-width:${minScreenWidth}px;--min-column-width:${minColumWidth}px;--predicted-color:${predictedColor};`}
@@ -86,6 +90,7 @@
 		<Article></Article>
 	</div>
 </div>
+{/if}
 
 <!-- <div class="alert">
 </div> -->

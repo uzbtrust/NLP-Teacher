@@ -24,49 +24,8 @@
 		</div>
 	</div>
 	<div class="icons flex items-center gap-3">
-		<!-- arxiv -->
 		<a
-			href="https://dl.acm.org/doi/pdf/10.1145/3772318.3791725"
-			target="_blank"
-			data-click="pdf-btn"
-		>
-			<svg
-				class="h-6 w-6 text-gray-800 dark:text-white"
-				aria-hidden="true"
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				fill="currentColor"
-				viewBox="0 0 24 24"
-			>
-				<path
-					fill-rule="evenodd"
-					d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2V4a2 2 0 0 0-2-2h-7Zm-6 9a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h.5a2.5 2.5 0 0 0 0-5H5Zm1.5 3H6v-1h.5a.5.5 0 0 1 0 1Zm4.5-3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 15 15.375v-1.75A2.626 2.626 0 0 0 12.375 11H11Zm1 5v-3h.375a.626.626 0 0 1 .625.626v1.748a.625.625 0 0 1-.626.626H12Zm5-5a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1v-1h1a1 1 0 1 0 0-2h-2Z"
-					clip-rule="evenodd"
-				/>
-			</svg>
-		</a>
-		<!-- video -->
-		<a href="https://www.youtube.com/watch?v=ECR4oAwocjs" target="_blank" data-click="ytb-btn">
-			<svg
-				class="h-6 w-6 text-gray-800 dark:text-white"
-				aria-hidden="true"
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				fill="currentColor"
-				viewBox="0 0 24 24"
-			>
-				<path
-					fill-rule="evenodd"
-					d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z"
-					clip-rule="evenodd"
-				/>
-			</svg>
-		</a>
-		<!-- repo -->
-		<a
-			href="https://github.com/poloclub/transformer-explainer"
+			href="https://github.com/uzbtrust/NLP-Teacher"
 			target="_blank"
 			data-click="github_btn"
 		>
@@ -92,6 +51,13 @@
 <style lang="scss">
 	.top-bar {
 		background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0) 100%);
+
+		@media (max-width: 900px) {
+			padding-left: 1rem;
+			padding-right: 1rem;
+			gap: 0.75rem;
+		}
+
 		.input-wrapper {
 			&.active {
 				opacity: 1;
@@ -104,12 +70,14 @@
 		.logo {
 			flex-shrink: 0;
 			white-space: nowrap;
-			font-family: 'Jersey 10', sans-serif;
+			font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
 			font-optical-sizing: auto;
 			font-style: normal;
+			font-weight: 700;
+			letter-spacing: 0.01em;
 
-			font-size: 2rem;
+			font-size: 1.5rem;
 			// color: theme('colors.blue.800');
 
 			background: linear-gradient(
@@ -121,7 +89,8 @@
 			-webkit-text-fill-color: transparent;
 
 			.small {
-				font-size: 1.8rem;
+				font-size: 1.15rem;
+				letter-spacing: 0.06em;
 			}
 		}
 		.icons {

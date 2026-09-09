@@ -1,3 +1,13 @@
+html {
+	color-scheme: light;
+	background-color: #ffffff;
+}
+
+body {
+	background-color: #ffffff;
+	color: theme('colors.gray.800');
+}
+
 svg {
 	overflow: visible;
 }

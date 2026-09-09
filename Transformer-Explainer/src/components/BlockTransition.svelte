@@ -119,6 +119,10 @@
 					? document.querySelector('.step.transformer-blocks .content .column.final')
 					: document.querySelector('.step.transformer-blocks .content');
 
+			// Bu funksiya elementlar DOM'ga joylashishidan oldin ham chaqirilishi mumkin
+			// (onMount + resize kuzatuvchisi). Null bo'lsa, keyingi chaqiruvni kutamiz.
+			if (!embedding || !block) return;
+
 			const embeddingRect = embedding.getBoundingClientRect();
 			const blockRect = block.getBoundingClientRect();
 

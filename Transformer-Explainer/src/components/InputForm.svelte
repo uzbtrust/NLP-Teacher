@@ -353,6 +353,11 @@
 		transform: translate(0, 100%);
 		color: theme('colors.gray.400');
 		font-size: 0.9rem;
+		/* Tor ekranda matn diagramma ustiga chiqib ketmasin */
+		max-width: 100%;
+		text-align: right;
+		line-height: 1.3;
+		pointer-events: none;
 	}
 	:global(.generate-button) {
 		padding: 0.4rem 0.8rem;
