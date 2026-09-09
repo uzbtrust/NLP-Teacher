@@ -1,0 +1,16 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "transformer-explainer",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"--prefix",
+				"/Users/uzbtrust/Desktop/Explainer/Transformer-Explainer",
+				"run",
+				"dev"
+			],
+			"port": 5173
+		}
+	]
+}
