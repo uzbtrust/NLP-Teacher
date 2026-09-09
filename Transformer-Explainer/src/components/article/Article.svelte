@@ -129,8 +129,99 @@
 				<code>"Data"</code> va <code>"visualization"</code> so'zlari alohida tokenlarga to'g'ri
 				keladi, <code>"empowers"</code> so'zi esa ikkita tokenga bo'linadi. Tokenlarning to'liq
 				lug'ati (vocabulary) model o'qitilishidan oldin belgilanadi: GPT-2 lug'atida
-				<code>50,257</code> ta noyob token bor. Endi kirish matnini alohida ID ga ega tokenlarga
-				ajratdik, demak ularning vektor ko'rinishini embedding'lardan olishimiz mumkin.
+				<code>50,257</code> ta noyob token bor.
+			</p>
+
+			<h4>Lug'at qanday tuzilgan: BPE</h4>
+			<p>
+				Bu lug'at qo'lda yozilmagan. U <strong>BPE</strong> (Byte Pair Encoding) algoritmi bilan
+				ma'lumotdan o'rganilgan. G'oya juda sodda: matnni alohida belgilarga ajratib, eng ko'p
+				yonma-yon uchraydigan juftlikni topamiz va uni bitta yangi belgi sifatida birlashtiramiz.
+				So'ng yana takrorlaymiz — kerakli lug'at hajmiga yetguncha.
+			</p>
+			<p>
+				Natijada tez-tez uchraydigan so'zlar (<code>" the"</code>, <code>" data"</code>) bitta
+				token bo'lib qoladi, kam uchraydiganlari esa bo'laklarga ajraladi. Ya'ni lug'at
+				<em>o'qitish matnida nima ko'p uchraganiga</em> qarab shakllanadi — bu keyinchalik muhim
+				oqibatlarga olib keladi.
+			</p>
+			<p>
+				GPT-2 aynan <strong>byte-level BPE</strong> ishlatadi: u matnni harflar emas, baytlar
+				ustida ishlaydi. Shu sababli GPT-2 da "noma'lum token" (<code>&lt;UNK&gt;</code>) degan
+				tushuncha umuman yo'q — istalgan matnni, hatto emoji yoki hech qachon ko'rmagan alifboni
+				ham, baytlarga ajratib ifodalay oladi. Faqat bu ifoda samarali bo'lmasligi mumkin.
+			</p>
+
+			<h4>Nima uchun bu o'zbek tili uchun muhim</h4>
+			<p>
+				GPT-2 ning lug'ati asosan inglizcha matnda o'rgatilgan. Shuning uchun o'zbekcha matn
+				ancha ko'p tokenga bo'linadi. Quyidagi raqamlar GPT-2 tokenizatorining haqiqiy natijasi:
+			</p>
+			<div class="token-cost">
+				<table>
+					<thead>
+						<tr>
+							<th>Matn</th>
+							<th>So'z</th>
+							<th>Token</th>
+							<th>Token / so'z</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>Data visualization empowers users to</code></td>
+							<td>5</td>
+							<td>6</td>
+							<td>1.2</td>
+						</tr>
+						<tr>
+							<td>
+								<code>Ma'lumotlarni vizualizatsiya qilish foydalanuvchilarga imkon beradi</code>
+							</td>
+							<td>6</td>
+							<td>29</td>
+							<td>4.8</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p>
+				Bitta so'zni olib ko'raylik. <code>"Kitobxonlarimizning"</code> — model uchun bu bitta
+				tushuncha emas, <strong>yettita</strong> bo'lak:
+			</p>
+			<p class="token-split">
+				<span>Kit</span><span>ob</span><span>xon</span><span>lar</span><span>im</span><span>iz</span
+				><span>ning</span>
+			</p>
+			<p>
+				Taqqoslash uchun, inglizcha <code>"Our readers"</code> — atigi ikkita token. Buning uchta
+				amaliy oqibati bor:
+			</p>
+			<ul>
+				<li>
+					<strong>Kontekst tezroq to'ladi.</strong> Bir xil uzunlikdagi matn o'zbek tilida
+					kontekst oynasining bir necha barobar ko'p qismini egallaydi.
+				</li>
+				<li>
+					<strong>API qimmatroq tushadi.</strong> To'lov tokenlar bo'yicha hisoblanadi, so'zlar
+					bo'yicha emas.
+				</li>
+				<li>
+					<strong>Sifat pasayadi.</strong> So'z ma'nosiz bo'laklarga sochilganda, model uning
+					yaxlit ma'nosini ushlab olishi qiyinlashadi. O'zbek tilidagi qo'shimchalar
+					(<code>-lar</code>, <code>-imiz</code>, <code>-ning</code>) morfologik jihatdan
+					mantiqli, lekin BPE ularni tilni bilgani uchun emas, shunchaki statistika tufayli
+					ajratgan.
+				</li>
+			</ul>
+			<p>
+				Zamonaviy modellar (Llama 3, Gemma, Qwen) ancha kattaroq va ko'p tilli lug'atdan
+				foydalanadi — masalan 128,000 yoki 256,000 token. Bu o'zbekcha matn uchun tokenlar sonini
+				sezilarli kamaytiradi, ammo muammoni butunlay yo'q qilmaydi.
+			</p>
+			<p>
+				Endi kirish matnini alohida ID ga ega tokenlarga ajratdik, demak ularning vektor
+				ko'rinishini embedding'lardan olishimiz mumkin.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-token-embedding">
@@ -433,13 +524,27 @@
 		</p>
 		<ul>
 			<li>
-				<code>top-k sampling</code>: nomzod tokenlarni eng yuqori ehtimollikka ega k ta token bilan
-				cheklaydi va ehtimoli past variantlarni chetlab o'tadi.
+				<code>greedy</code>: har safar eng yuqori ehtimollikdagi tokenni oladi. Natija to'liq
+				deterministik — bir xil promptga har doim bir xil javob. Lekin matn tez zerikarli va
+				takroriy bo'lib qoladi.
 			</li>
 			<li>
-				<code>top-p sampling</code>: yig'indi ehtimoli p chegarasidan oshadigan eng kichik token
-				to'plamini oladi — shunda faqat eng ehtimolli tokenlar ishtirok etadi, ammo xilma-xillik ham
-				saqlanadi.
+				<code>top-k sampling</code>: nomzod tokenlarni eng yuqori ehtimollikka ega k ta token bilan
+				cheklaydi va ehtimoli past variantlarni chetlab o'tadi. Kamchiligi — k qat'iy son:
+				model bir tokenga juda ishonch bilan qaraganda ham, u yana k−1 ta keraksiz nomzodni
+				ushlab turadi.
+			</li>
+			<li>
+				<code>top-p sampling</code> (nucleus): yig'indi ehtimoli p chegarasidan oshadigan eng kichik
+				token to'plamini oladi — shunda faqat eng ehtimolli tokenlar ishtirok etadi, ammo
+				xilma-xillik ham saqlanadi. To'plam hajmi vaziyatga qarab o'zgaradi: model ishonchli
+				bo'lsa kichik, ikkilanayotgan bo'lsa kattaroq.
+			</li>
+			<li>
+				<code>min-p sampling</code>: eng yangi usullardan biri. Chegara eng yuqori ehtimollikka
+				nisbatan belgilanadi — masalan <code>min_p = 0.1</code> bo'lsa, eng kuchli nomzodning
+				ehtimolidan 10 barobardan ko'proq past bo'lgan tokenlar tashlanadi. Bu yuqori temperature
+				da ham matnni izdan chiqarmaydi, chunki mutlaqo mos kelmaydigan tokenlar baribir kesiladi.
 			</li>
 		</ul>
 		<p>
@@ -618,6 +723,55 @@
 	.article-section {
 		padding-bottom: 2rem;
 	}
+
+	/* Tokenizatsiya bo'limidagi taqqoslash jadvali */
+	.token-cost {
+		overflow-x: auto;
+		margin: 1.25rem 0;
+	}
+
+	.token-cost table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+	}
+
+	.token-cost th,
+	.token-cost td {
+		text-align: left;
+		padding: 0.5rem 0.75rem;
+		border-bottom: 1px solid theme('colors.gray.200');
+	}
+
+	.token-cost th {
+		font-weight: 600;
+		color: theme('colors.gray.700');
+		white-space: nowrap;
+	}
+
+	.token-cost td:not(:first-child),
+	.token-cost th:not(:first-child) {
+		text-align: right;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+	}
+
+	/* Bitta so'zning token bo'laklari */
+	.token-split {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+
+	.token-split span {
+		font-family: theme('fontFamily.mono');
+		font-size: 0.85rem;
+		padding: 0.2rem 0.5rem;
+		border-radius: 3px;
+		background: theme('colors.purple.50');
+		color: theme('colors.purple.700');
+		border: 1px solid theme('colors.purple.200');
+	}
 	.architecture-section {
 		padding-top: 1rem;
 	}
@@ -669,9 +823,9 @@
 
 	#description h4 {
 		color: theme('colors.gray.700');
-		font-size: 1.6rem;
-		font-weight: 200;
-		padding-top: 1rem;
+		font-size: 1.2rem;
+		font-weight: 400;
+		padding-top: 1.25rem;
 	}
 
 	#description p {
