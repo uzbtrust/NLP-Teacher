@@ -1,0 +1,18 @@
+.DS_Store
+node_modules
+.env
+.env.*
+!.env.example
+
+# Build natijalari
+/build
+/.svelte-kit
+/package
+.vercel
+.output
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Python
+__pycache__
+*.pyc
