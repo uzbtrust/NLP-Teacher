@@ -5,6 +5,7 @@
 	import InputForm from '~/components/InputForm.svelte';
 	import { ga } from '~/utils/event';
 	import Sampling from '~/components/Sampling.svelte';
+	import { base } from '$app/paths';
 
 	export let isActive;
 
@@ -23,7 +24,8 @@
 			{/if}
 		</div>
 	</div>
-	<div class="icons flex items-center gap-3">
+	<div class="icons flex items-center gap-4">
+		<a class="darslik-link" href="{base}/darslik" data-click="darslik_btn">Darslik</a>
 		<a
 			href="https://github.com/uzbtrust/NLP-Teacher"
 			target="_blank"
@@ -49,6 +51,23 @@
 </div>
 
 <style lang="scss">
+	.darslik-link {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: theme('colors.purple.600');
+		white-space: nowrap;
+		padding: 0.25rem 0.6rem;
+		border: 1px solid theme('colors.purple.200');
+		border-radius: 4px;
+		transition: background 0.15s ease;
+
+		&:hover {
+			background: theme('colors.purple.50');
+		}
+	}
+
 	.top-bar {
 		background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0) 100%);
 

@@ -21,13 +21,21 @@ const config = {
 		}),
 		prerender: {
 			// List the specific routes to prerender
-			entries: ['/' /* other routes if needed */]
+			entries: [
+				'/',
+				'/darslik',
+				'/darslik/rmsnorm',
+				'/darslik/pre-ln',
+				'/darslik/swiglu',
+				'/darslik/rope',
+				'/darslik/blok'
+			]
 		},
 		alias: {
 			'~': './src'
 		},
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/transformer-explainer' : ''
+			base: process.env.NODE_ENV === 'production' ? '/NLP-Teacher' : ''
 		}
 	}
 };

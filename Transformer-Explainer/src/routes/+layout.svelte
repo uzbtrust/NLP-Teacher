@@ -8,6 +8,7 @@
 	import { Spinner } from 'flowbite-svelte';
 	import GTM from '~/utils/gtm.svelte';
 	import MobileNotice from '~/components/MobileNotice.svelte';
+	import DarslikTopbar from '~/components/darslik/DarslikTopbar.svelte';
 	import { page } from '$app/stores';
 
 	let topBarHeight = 0;
@@ -19,6 +20,9 @@
 	let intersectionObserver: IntersectionObserver;
 	let tobBarActive = false;
 	let target: HTMLElement;
+
+	// /darslik butunlay boshqa qobiqda ochiladi: model yuklanmaydi, sahifa normal skroll qiladi.
+	$: isDarslik = ($page.route.id ?? '').startsWith('/darslik');
 
 	onMount(() => {
 		isLoaded.set(true);
@@ -69,40 +73,41 @@
 <GTM />
 {#if $isMobile}
 	<MobileNotice />
-{:else}
-<div
-	id="app"
-	style={`--min-screen-width:${minScreenWidth}px;--min-column-width:${minColumWidth}px;--predicted-color:${predictedColor};`}
->
-	<div id="landing">
-		<header bind:offsetHeight={topBarHeight} style="transform: translateX({-1 * scrollLeft}px);">
-			<Topbar isActive={tobBarActive} />
+{:else if isDarslik}
+	<div id="darslik-app">
+		<header class="darslik-header">
+			<DarslikTopbar />
 		</header>
-		<main id="main" style={`padding-top:${topBarHeight}px`} bind:this={target}>
-			{#if $isLoaded}
-				<slot />
-			{:else}
-				<div class="flex h-full w-full items-center justify-center"><Spinner color="purple" /></div>
-			{/if}
+		<main>
+			<slot />
 		</main>
 	</div>
-	<div class="article h-auto w-full">
-		<Article></Article>
+{:else}
+	<div
+		id="app"
+		style={`--min-screen-width:${minScreenWidth}px;--min-column-width:${minColumWidth}px;--predicted-color:${predictedColor};`}
+	>
+		<div id="landing">
+			<header bind:offsetHeight={topBarHeight} style="transform: translateX({-1 * scrollLeft}px);">
+				<Topbar isActive={tobBarActive} />
+			</header>
+			<main id="main" style={`padding-top:${topBarHeight}px`} bind:this={target}>
+				{#if $isLoaded}
+					<slot />
+				{:else}
+					<div class="flex h-full w-full items-center justify-center">
+						<Spinner color="purple" />
+					</div>
+				{/if}
+			</main>
+		</div>
+		<div class="article h-auto w-full">
+			<Article></Article>
+		</div>
 	</div>
-</div>
 {/if}
 
-<!-- <div class="alert">
-</div> -->
-
 <style lang="scss">
-	.alert {
-		position: fixed;
-		bottom: 1rem;
-		left: 1rem;
-		z-index: 9999;
-	}
-
 	#app {
 		height: 100vh;
 		min-width: 900px;
@@ -130,5 +135,23 @@
 	}
 	.article {
 		padding-top: 2rem;
+	}
+
+	#darslik-app {
+		min-width: 860px;
+
+		.darslik-header {
+			position: sticky;
+			top: 0;
+			min-width: 0;
+			z-index: $TOP_BAR_INDEX;
+		}
+
+		main {
+			position: static;
+			height: auto;
+			display: block;
+			overflow: visible;
+		}
 	}
 </style>
