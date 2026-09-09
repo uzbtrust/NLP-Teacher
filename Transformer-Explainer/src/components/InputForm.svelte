@@ -180,7 +180,7 @@
 						bind:this={inputRef}
 						contenteditable={!disabled}
 						class="text-box"
-						placeholder="Test your own input text"
+						placeholder="O'z matningizni kiritib ko'ring"
 						on:focus={onFocusInput}
 						on:input={onInput}
 						on:keydown={handleKeyDown}
@@ -212,14 +212,14 @@
 				{/if}
 				{#if $isMobile}
 					<span class="helper-text"
-						>Try the examples. Please use a desktop computer to input GPT-2 prompts directly.</span
+						>Misollarni sinab ko'ring. GPT-2 ga to'g'ridan-to'g'ri prompt kiritish uchun kompyuterdan foydalaning.</span
 					>
 				{:else if $isLoaded && $isFetchingModel}
 					<span class="helper-text"
-						>Try the examples while GPT-2 model is being downloaded (600MB)</span
+						>GPT-2 modeli yuklanayotgan paytda misollarni sinab ko'ring (600MB)</span
 					>
 				{:else if exceedLimit}
-					<span class="helper-text">You can enter up to {wordLimit} words.</span>
+					<span class="helper-text">Ko'pi bilan {wordLimit} ta so'z kirita olasiz.</span>
 				{/if}
 			</div>
 		</ButtonGroup>

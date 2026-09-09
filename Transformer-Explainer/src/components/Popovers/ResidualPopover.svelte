@@ -21,7 +21,7 @@
 	goTo="article-residual"
 >
 	<div class="residual-content">
-		Adds layer input to output to help preserve information.
+		Ma'lumot saqlanishi uchun qatlam kirishini chiqishiga qo'shadi.
 	</div></CommonPopover
 >
 

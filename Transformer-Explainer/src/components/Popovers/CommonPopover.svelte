@@ -63,7 +63,7 @@
 					})}
 				data-click={`read-more-btn-${className}`}
 			>
-				Read more
+				Batafsil
 			</div>
 		{/if}
 	</div></Popover

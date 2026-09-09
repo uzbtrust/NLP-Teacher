@@ -392,7 +392,7 @@
 			</div>
 		</div> -->
 		<div class="matrix flex flex-col items-center">
-			<div class="title">Expanded <br />Embeddings</div>
+			<div class="title">Kengaytirilgan <br />embedding’lar</div>
 			<div class="flex">
 				<Matrix
 					className="mlp-out"

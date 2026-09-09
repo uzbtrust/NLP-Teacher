@@ -186,7 +186,7 @@
 	class:active={$isBoundingBoxActive}
 >
 	<TextbookTooltip id="blocks">
-		<span class="title-text">Transformer Block {$blockIdxTemp + 1}</span>
+		<span class="title-text">Transformer bloki {$blockIdxTemp + 1}</span>
 	</TextbookTooltip>
 	<button
 		data-click="transformer-block-prev-btn"

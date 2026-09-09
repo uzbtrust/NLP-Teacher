@@ -84,7 +84,7 @@
 								</div>
 							{/each}
 							<Tooltip class="popover" triggeredBy={'.step.attention .key .cell'} placement="right"
-								>Key, Head {$attentionHeadIdx + 1}, vector({$modelMeta.dimension /
+								>Key, {$attentionHeadIdx + 1}-head, vektor({$modelMeta.dimension /
 									$modelMeta.attention_head_num})</Tooltip
 							>
 						</div>
@@ -104,7 +104,7 @@
 								class="popover"
 								triggeredBy={'.step.attention .query .cell'}
 								placement="right"
-								>Query, Head {$attentionHeadIdx + 1}, vector({$modelMeta.dimension /
+								>Query, {$attentionHeadIdx + 1}-head, vektor({$modelMeta.dimension /
 									$modelMeta.attention_head_num})</Tooltip
 							>
 						</div>

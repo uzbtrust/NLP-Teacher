@@ -36,7 +36,7 @@
 		<div class="formula-steps">
 			<div class="formula-step scaled">
 				<TextbookTooltip id="temperature">
-					<div class="step-title">Scaled logit</div></TextbookTooltip
+					<div class="step-title">Masshtablangan logit</div></TextbookTooltip
 				>
 				<div class="step-content">
 					<div class="fraction">

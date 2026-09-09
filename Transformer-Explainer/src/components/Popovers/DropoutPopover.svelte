@@ -19,7 +19,7 @@
 	goTo="article-dropout"
 >
 	<div class="dropout-content">
-		Disables randomly selected neurons. Used only during training.
+		Tasodifiy tanlangan neyronlarni o'chiradi. Faqat o'qitish davomida ishlatiladi.
 	</div></CommonPopover
 >
 

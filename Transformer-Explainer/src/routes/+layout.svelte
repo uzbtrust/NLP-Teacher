@@ -6,7 +6,6 @@
 	import Article from '~/components/article/Article.svelte';
 	import { onMount } from 'svelte';
 	import { Spinner } from 'flowbite-svelte';
-	import Alert from '~/components/Alert.svelte';
 	import GTM from '~/utils/gtm.svelte';
 	import { page } from '$app/stores';
 
@@ -89,7 +88,6 @@
 </div>
 
 <!-- <div class="alert">
-	<Alert />
 </div> -->
 
 <style lang="scss">

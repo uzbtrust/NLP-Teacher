@@ -19,7 +19,7 @@
 	goTo="article-ln"
 >
 	<div class="ln-content">
-		Normalizes layer input to have a standard distribution for stability.
+		Barqarorlik uchun qatlam kirishini standart taqsimotga keltiradi.
 	</div></CommonPopover
 >
 

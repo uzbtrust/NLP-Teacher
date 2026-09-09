@@ -383,7 +383,7 @@
 			<div class="symbol equal px-4">=</div>
 		</div>
 		<div class="matrix flex flex-col items-center">
-			<div class="title">Compressed <br />Embeddings</div>
+			<div class="title">Siqilgan <br />embedding’lar</div>
 			<div class="flex">
 				<Matrix
 					className="mlp-down-out"

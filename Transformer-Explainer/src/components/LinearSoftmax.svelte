@@ -211,7 +211,7 @@
 		data-click="prob-step-title"
 	>
 		<div class="title-text flex w-max items-center gap-1">
-			Probabilities
+			Ehtimolliklar
 			<ZoomInOutline></ZoomInOutline>
 		</div>
 	</div>

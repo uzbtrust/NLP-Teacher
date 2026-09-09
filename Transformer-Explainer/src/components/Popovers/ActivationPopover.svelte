@@ -11,7 +11,7 @@
 
 <CommonPopover
 	className="activation-popover"
-	title="GELU Activation"
+	title="GELU aktivatsiyasi"
 	{offset}
 	{triggeredBy}
 	{trigger}
@@ -19,7 +19,7 @@
 	goTo="article-activation"
 >
 	<div class="activation-content">
-		Applies non-linear transformation to linearly transformed output to learn complex patterns.
+		Chiziqli o'zgartirilgan natijaga nochiziqli o'zgartirish qo'llaydi — murakkab naqshlarni o'rganish uchun.
 	</div></CommonPopover
 >
 

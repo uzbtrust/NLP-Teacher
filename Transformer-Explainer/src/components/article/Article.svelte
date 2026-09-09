@@ -6,92 +6,96 @@
 
 <div id="description">
 	<div class="article-section" data-click="article-intro">
-		<h1>What is a Transformer?</h1>
+		<h1>Transformer nima?</h1>
 
 		<p>
-			Transformer is a neural network architecture that has fundamentally changed the approach to
-			Artificial Intelligence. Transformer was first introduced in the seminal paper
+			Transformer — sun'iy intellektga bo'lgan yondashuvni tubdan o'zgartirgan neyron tarmoq
+			(neural network) arxitekturasi. U birinchi marta 2017-yilda
 			<a
 				href="https://dl.acm.org/doi/10.5555/3295222.3295349"
 				title="ACM Digital Library"
 				target="_blank">"Attention is All You Need"</a
 			>
-			in 2017 and has since become the go-to architecture for deep learning models, powering text-generative
-			models like OpenAI's <strong>GPT</strong>, Meta's <strong>Llama</strong>, and Google's
-			<strong>Gemini</strong>. Beyond text, Transformer is also applied in
+			nomli mashhur maqolada taqdim etilgan va o'shandan beri chuqur o'rganish (deep learning) modellari
+			uchun asosiy arxitekturaga aylandi. OpenAI ning <strong>GPT</strong>, Meta ning
+			<strong>Llama</strong>
+			va Google ning <strong>Gemini</strong> kabi matn generatsiya qiluvchi modellari aynan shu arxitekturaga
+			asoslanadi. Matndan tashqari Transformer
 			<a
 				href="https://huggingface.co/learn/audio-course/en/chapter3/introduction"
 				title="Hugging Face"
-				target="_blank">audio generation</a
+				target="_blank">audio generatsiya</a
 			>,
 			<a
 				href="https://huggingface.co/learn/computer-vision-course/unit3/vision-transformers/vision-transformers-for-image-classification"
 				title="Hugging Face"
-				target="_blank">image recognition</a
+				target="_blank">tasvirni tanish</a
 			>,
 			<a href="https://elifesciences.org/articles/82819" title="eLife"
-				>protein structure prediction</a
-			>, and even
+				>oqsil strukturasini bashorat qilish</a
+			>, hatto
 			<a
 				href="https://www.deeplearning.ai/the-batch/reinforcement-learning-plus-transformers-equals-efficiency/"
 				title="Deep Learning AI"
-				target="_blank">game playing</a
-			>, demonstrating its versatility across numerous domains.
+				target="_blank">o'yin o'ynash</a
+			> sohalarida ham qo'llaniladi — bu uning naqadar universal ekanini ko'rsatadi.
 		</p>
 		<p>
-			Fundamentally, text-generative Transformer models operate on the principle of <strong
-				>next-token prediction</strong
-			>: given a text prompt from the user, what is the
-			<em>most probable next token (a word or part of a word)</em> that will follow this input? The core
-			innovation and power of Transformers lie in their use of self-attention mechanism, which allows
-			them to process entire sequences and capture long-range dependencies more effectively than previous
-			architectures.
+			Mohiyatan, matn generatsiya qiluvchi Transformer modellari <strong>keyingi tokenni bashorat
+			qilish</strong> (next-token prediction) tamoyili asosida ishlaydi: foydalanuvchi bergan matn
+			(prompt) asosida
+			<em>eng ehtimolli keyingi token (so'z yoki so'z bo'lagi)</em> qaysi bo'ladi? Transformer'ning
+			asosiy kashfiyoti va kuchi — self-attention mexanizmida. Aynan shu mexanizm modelga butun
+			ketma-ketlikni birdaniga qayta ishlash va uzoq masofadagi bog'liqliklarni oldingi
+			arxitekturalarga qaraganda ancha samarali ushlab olish imkonini beradi.
 		</p>
 		<p>
-			GPT-2 family of models are prominent examples of text-generative Transformers. Transformer
-			Explainer is powered by the
+			GPT-2 oilasidagi modellar — matn generatsiya qiluvchi Transformer'ning yorqin namunasi.
+			Transformer Explainer
 			<a href="https://huggingface.co/openai-community/gpt2" title="Hugging Face" target="_blank"
 				>GPT-2</a
 			>
-			(small) model which has 124 million parameters. While it is not the latest or most powerful Transformer
-			model, it shares many of the same architectural components and principles found in the current
-			state-of-the-art models making it an ideal starting point for understanding the basics.
+			(small) modelida ishlaydi, unda 124 million parametr bor. Bu eng so'nggi yoki eng kuchli Transformer
+			modeli emas, lekin uning arxitektura komponentlari va tamoyillari bugungi eng ilg'or modellar bilan
+			ko'p jihatdan bir xil — shuning uchun asoslarni tushunish uchun ideal boshlang'ich nuqta.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-overview">
-		<h1>Transformer Architecture</h1>
+		<h1>Transformer arxitekturasi</h1>
 
 		<p>
-			Every text-generative Transformer consists of these <strong>three key components</strong>:
+			Har qanday matn generatsiya qiluvchi Transformer <strong>uchta asosiy qismdan</strong> iborat:
 		</p>
 		<ol>
 			<li>
-				<strong class="bold-purple">Embedding</strong>: Text input is divided into smaller units
-				called tokens, which can be words or subwords. These tokens are converted into numerical
-				vectors called embeddings, which capture the semantic meaning of words.
+				<strong class="bold-purple">Embedding</strong>: kirish matni token deb ataluvchi kichik
+				bo'laklarga ajratiladi — bular so'z yoki so'z bo'lagi (subword) bo'lishi mumkin. Keyin bu
+				tokenlar embedding deb ataluvchi raqamli vektorlarga aylantiriladi; bu vektorlar so'zlarning
+				semantik ma'nosini ifodalaydi.
 			</li>
 			<li>
-				<strong class="bold-purple">Transformer Block</strong> is the fundamental building block of
-				the model that processes and transforms the input data. Each block includes:
+				<strong class="bold-purple">Transformer bloki</strong> — modelning kirish ma'lumotini qayta
+				ishlaydigan va o'zgartiradigan asosiy qurilish g'ishti. Har bir blok quyidagilarni o'z
+				ichiga oladi:
 				<ul class="">
 					<li>
-						<strong>Attention Mechanism</strong>, the core component of the Transformer block. It
-						allows tokens to communicate with other tokens, capturing contextual information and
-						relationships between words.
+						<strong>Attention mexanizmi</strong> — Transformer blokining markaziy qismi. U tokenlarga
+						bir-biri bilan "muloqot qilish" imkonini beradi, shu orqali kontekst ma'lumoti va so'zlar
+						orasidagi munosabatlar ushlab olinadi.
 					</li>
 					<li>
-						<strong>MLP (Multilayer Perceptron) Layer</strong>, a feed-forward network that operates
-						on each token independently. While the goal of the attention layer is to route
-						information between tokens, the goal of the MLP is to refine each token's
-						representation.
+						<strong>MLP (Multilayer Perceptron) qatlami</strong> — har bir token ustida mustaqil
+						ishlaydigan feed-forward tarmoq. Attention qatlamining vazifasi tokenlar orasida
+						ma'lumot uzatish bo'lsa, MLP ning vazifasi — har bir tokenning o'z tasvirini
+						(representation) yanada aniqlashtirish.
 					</li>
 				</ul>
 			</li>
 			<li>
-				<strong class="bold-purple">Output Probabilities</strong>: The final linear and softmax
-				layers transform the processed embeddings into probabilities, enabling the model to make
-				predictions about the next token in a sequence.
+				<strong class="bold-purple">Chiqish ehtimolliklari</strong>: oxirgi linear va softmax
+				qatlamlari qayta ishlangan embedding'larni ehtimolliklarga aylantiradi va model
+				ketma-ketlikdagi keyingi tokenni bashorat qila oladi.
 			</li>
 		</ol>
 	</div>
@@ -99,52 +103,54 @@
 	<div class="article-section" id="embedding" data-click="article-embedding">
 		<h2>Embedding</h2>
 		<p>
-			Let's say you want to generate text using a Transformer model. You add the prompt like this
-			one: <code>“Data visualization empowers users to”</code>. This input needs to be converted
-			into a format that the model can understand and process. That is where embedding comes in: it
-			transforms the text into a numerical representation that the model can work with. To convert a
-			prompt into embedding, we need to 1) tokenize the input, 2) obtain token embeddings, 3) add
-			positional information, and finally 4) add up token and position encodings to get the final
-			embedding. Let’s see how each of these steps is done.
+			Aytaylik, siz Transformer modeli yordamida matn generatsiya qilmoqchisiz. Quyidagicha prompt
+			yozasiz: <code>"Data visualization empowers users to"</code>. Bu kirish matni model tushunadigan
+			va qayta ishlay oladigan formatga o'tkazilishi kerak. Aynan shu yerda embedding ishga tushadi:
+			u matnni model ishlay oladigan raqamli ko'rinishga aylantiradi. Promptni embedding'ga
+			aylantirish uchun bizga to'rt qadam kerak: 1) kirishni tokenlarga ajratish, 2) token
+			embedding'larini olish, 3) pozitsiya haqidagi ma'lumotni qo'shish va nihoyat 4) token va
+			pozitsiya kodlashlarini qo'shib yakuniy embedding'ni hosil qilish. Keling, har bir qadamni
+			ko'rib chiqamiz.
 		</p>
 		<div class="figure">
 			<img src="./article_assets/embedding.png" width="65%" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">1</span>. Expanding the Embedding layer view, showing how the
-			input prompt is converted to a vector representation. The process involves
-			<span class="fig-numbering">(1)</span> Tokenization, (2) Token Embedding, (3) Positional Encoding,
-			and (4) Final Embedding.
+			<span class="attention">1</span>-rasm. Embedding qatlamining kengaytirilgan ko'rinishi: kirish
+			prompti qanday qilib vektor ko'rinishiga o'tkaziladi. Jarayon
+			<span class="fig-numbering">(1)</span> Tokenizatsiya, (2) Token Embedding, (3) Positional
+			Encoding va (4) Yakuniy Embedding bosqichlaridan iborat.
 		</div>
 		<div class="article-subsection">
-			<h3>Step 1: Tokenization</h3>
+			<h3>1-qadam: Tokenizatsiya</h3>
 			<p>
-				Tokenization is the process of breaking down the input text into smaller, more manageable
-				pieces called tokens. These tokens can be a word or a subword. The words <code>"Data"</code>
-				and <code>"visualization"</code> correspond to unique tokens, while the word
-				<code>"empowers"</code>
-				is split into two tokens. The full vocabulary of tokens is decided before training the model:
-				GPT-2's vocabulary has <code>50,257</code> unique tokens. Now that we split our input text into
-				tokens with distinct IDs, we can obtain their vector representation from embeddings.
+				Tokenizatsiya — kirish matnini token deb ataluvchi kichikroq, boshqarish osonroq bo'laklarga
+				ajratish jarayoni. Token so'z yoki so'z bo'lagi (subword) bo'lishi mumkin.
+				<code>"Data"</code> va <code>"visualization"</code> so'zlari alohida tokenlarga to'g'ri
+				keladi, <code>"empowers"</code> so'zi esa ikkita tokenga bo'linadi. Tokenlarning to'liq
+				lug'ati (vocabulary) model o'qitilishidan oldin belgilanadi: GPT-2 lug'atida
+				<code>50,257</code> ta noyob token bor. Endi kirish matnini alohida ID ga ega tokenlarga
+				ajratdik, demak ularning vektor ko'rinishini embedding'lardan olishimiz mumkin.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-token-embedding">
-			<h3>Step 2. Token Embedding</h3>
+			<h3>2-qadam. Token Embedding</h3>
 			<p>
-				GPT-2 (small) represents each token in the vocabulary as a 768-dimensional vector; the
-				dimension of the vector depends on the model. These embedding vectors are stored in a matrix
-				of shape <code>(50,257, 768)</code>, containing approximately 39 million parameters! This
-				extensive matrix allows the model to assign semantic meaning to each token, in the sense
-				that tokens with similar usage or meaning in language are placed close together in this
-				high-dimensional space, while dissimilar tokens are farther apart.
+				GPT-2 (small) lug'atdagi har bir tokenni 768 o'lchamli vektor sifatida ifodalaydi; vektor
+				o'lchami modelga bog'liq. Bu embedding vektorlari <code>(50,257, 768)</code> shaklidagi
+				matritsada saqlanadi — taxminan 39 million parametr! Shu ulkan matritsa tufayli model har
+				bir tokenga semantik ma'no bera oladi: tilda o'xshash ma'no yoki qo'llanishga ega tokenlar
+				bu ko'p o'lchamli fazoda bir-biriga yaqin joylashadi, o'xshashi bo'lmaganlari esa uzoqroq
+				turadi.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-positional-embedding">
-			<h3>Step 3. Positional Encoding</h3>
+			<h3>3-qadam. Positional Encoding</h3>
 			<p>
-				The Embedding layer also encodes information about each token's position in the input
-				prompt. Different models use various methods for positional encoding. GPT-2 trains its own
-				positional encoding matrix from scratch, integrating it directly into the training process.
+				Embedding qatlami har bir tokenning kirish promptidagi o'rni haqidagi ma'lumotni ham
+				kodlaydi. Turli modellar positional encoding uchun turli usullardan foydalanadi. GPT-2 o'z
+				positional encoding matritsasini noldan o'rganadi va uni bevosita o'qitish jarayoniga
+				qo'shib yuboradi.
 			</p>
 
 			<!-- <div class="article-subsection-l2">
@@ -168,7 +174,7 @@
 	</p>
 
 	<p>
-	  Here’s how it works:
+	  Here's how it works:
 	</p>
 
 	<span class='attention'>
@@ -190,42 +196,41 @@
   </div> -->
 		</div>
 		<div class="article-subsection">
-			<h3>Step 4. Final Embedding</h3>
+			<h3>4-qadam. Yakuniy Embedding</h3>
 			<p>
-				Finally, we sum the token and positional encodings to get the final embedding
-				representation. This combined representation captures both the semantic meaning of the
-				tokens and their position in the input sequence.
+				Nihoyat, token va pozitsiya kodlashlarini qo'shib yakuniy embedding ko'rinishini olamiz. Bu
+				birlashtirilgan ko'rinish ham tokenlarning semantik ma'nosini, ham ularning kirish
+				ketma-ketligidagi o'rnini o'zida saqlaydi.
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" data-click="article-transformer-block">
-		<h2>Transformer Block</h2>
+		<h2>Transformer bloki</h2>
 
 		<p>
-			The core of the Transformer's processing lies in the Transformer block, which comprises
-			multi-head self-attention and a Multi-Layer Perceptron layer. Most models consist of multiple
-			such blocks that are stacked sequentially one after the other. The token representations
-			evolve through layers, from the first block to the last one, allowing the model to build up an
-			intricate understanding of each token. This layered approach leads to higher-order
-			representations of the input. The GPT-2 (small) model we are examining consists of <code
-				>12</code
-			> such blocks.
+			Transformer'ning asosiy hisoblash ishi Transformer blokida bajariladi; blok multi-head
+			self-attention va Multi-Layer Perceptron qatlamidan iborat. Ko'pchilik modellar bunday
+			bloklarning ketma-ket joylashgan bir nechtasidan tashkil topadi. Token ko'rinishlari birinchi
+			blokdan oxirgisiga o'tib borar ekan, bosqichma-bosqich boyib boradi va model har bir token
+			haqida murakkab tushunchani shakllantiradi. Bu qatlamli yondashuv kirish ma'lumotining yuqori
+			darajali ko'rinishlarini hosil qiladi. Biz ko'rib chiqayotgan GPT-2 (small) modeli
+			<code>12</code> ta shunday blokdan iborat.
 		</p>
 	</div>
 
 	<div class="article-section" id="self-attention" data-click="article-attention">
 		<h3>Multi-Head Self-Attention</h3>
 		<p>
-			The self-attention mechanism enables the model to capture relationships among tokens in a
-			sequence, so that each token’s representation is influenced by the others. Multiple attention
-			heads allow the model to consider these relationships from different perspectives; for
-			example, one head may capture short-range syntactic links while another tracks broader
-			semantic context. In the following section, we will walk through how multi-head self-attention
-			is computed step by step.
+			Self-attention mexanizmi modelga ketma-ketlikdagi tokenlar orasidagi munosabatlarni ushlab
+			olish imkonini beradi — natijada har bir tokenning ko'rinishiga qolganlari ta'sir qiladi. Bir
+			nechta attention head bo'lishi esa modelga bu munosabatlarni turli nuqtai nazardan ko'rish
+			imkonini beradi: masalan, bitta head qisqa masofadagi sintaktik bog'lanishlarni ushlasa,
+			boshqasi kengroq semantik kontekstni kuzatishi mumkin. Quyidagi bo'limda multi-head
+			self-attention qanday hisoblanishini qadamma-qadam ko'rib chiqamiz.
 		</p>
 		<div class="article-subsection-l2">
-			<h4>Step 1: Query, Key, and Value Matrices</h4>
+			<h4>1-qadam: Query, Key va Value matritsalari</h4>
 
 			<div class="figure pt-10">
 				<img src="./article_assets/QKV.png" width="80%" />
@@ -239,100 +244,99 @@
 				</div>
 			</div>
 			<div class="figure-caption">
-				Figure <span class="attention">2</span>. Computing Query, Key, and Value matrices from the
-				original embedding.
+				<span class="attention">2</span>-rasm. Dastlabki embedding'dan Query, Key va Value
+				matritsalarini hisoblash.
 			</div>
 
 			<p>
-				Each token's embedding vector is transformed into three vectors:
+				Har bir tokenning embedding vektori uchta vektorga aylantiriladi:
 				<span class="q-color">Query (Q)</span>,
-				<span class="k-color">Key (K)</span>, and
-				<span class="v-color">Value (V)</span>. These vectors are derived by multiplying the input
-				embedding matrix with learned weight matrices for
+				<span class="k-color">Key (K)</span> va
+				<span class="v-color">Value (V)</span>. Bu vektorlar kirish embedding matritsasini
 				<span class="q-color">Q</span>,
-				<span class="k-color">K</span>, and
-				<span class="v-color">V</span>. Here's a web search analogy to help us build some intuition
-				behind these matrices:
+				<span class="k-color">K</span> va
+				<span class="v-color">V</span> uchun o'rganilgan og'irlik (weight) matritsalariga ko'paytirish
+				orqali olinadi. Ushbu matritsalar mohiyatini tushunish uchun internet qidiruviga o'xshatib ko'ramiz:
 			</p>
 			<ul>
 				<li>
-					<strong class="q-color font-medium">Query (Q)</strong> is the search text you type in the
-					search engine bar. This is the token you want to
-					<em>"find more information about"</em>.
+					<strong class="q-color font-medium">Query (Q)</strong> — bu siz qidiruv tizimiga
+					yozadigan matn. Ya'ni siz
+					<em>"bu haqda ko'proq ma'lumot topmoqchi bo'lgan"</em> token.
 				</li>
 				<li>
-					<strong class="k-color font-medium">Key (K)</strong> is the title of each web page in the search
-					result window. It represents the possible tokens the query can attend to.
+					<strong class="k-color font-medium">Key (K)</strong> — qidiruv natijalari oynasidagi har bir
+					sahifaning sarlavhasi. U query e'tibor qaratishi mumkin bo'lgan tokenlarni ifodalaydi.
 				</li>
 				<li>
-					<strong class="v-color font-medium">Value (V)</strong> is the actual content of web pages shown.
-					Once we matched the appropriate search term (Query) with the relevant results (Key), we want
-					to get the content (Value) of the most relevant pages.
+					<strong class="v-color font-medium">Value (V)</strong> — ko'rsatilgan sahifalarning haqiqiy
+					mazmuni. Qidiruv so'rovini (Query) mos natijalar (Key) bilan solishtirganimizdan keyin, eng
+					mos sahifalarning mazmunini (Value) olishni xohlaymiz.
 				</li>
 			</ul>
 			<p>
-				By using these QKV values, the model can calculate attention scores, which determine how
-				much focus each token should receive when generating predictions.
+				Shu QKV qiymatlaridan foydalanib model attention ballarini (attention scores) hisoblaydi —
+				ular bashorat qilishda har bir tokenga qanchalik e'tibor berish kerakligini belgilaydi.
 			</p>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 2: Multi-Head Splitting</h4>
+			<h4>2-qadam: Head'larga bo'lish</h4>
 			<p>
-				<span class="q-color">Query</span>, <span class="k-color">key</span>, and
+				<span class="q-color">Query</span>, <span class="k-color">Key</span> va
 				<span class="v-color">Value</span>
-				vectors are split into multiple heads—in GPT-2 (small)'s case, into
-				<code>12</code> heads. Each head processes a segment of the embeddings independently, capturing
-				different syntactic and semantic relationships. This design facilitates parallel learning of
-				diverse linguistic features, enhancing the model's representational power.
+				vektorlari bir nechta head'ga bo'linadi — GPT-2 (small) da
+				<code>12</code> ta head. Har bir head embedding'ning o'z bo'lagini mustaqil qayta ishlaydi va
+				turli sintaktik hamda semantik munosabatlarni ushlaydi. Bu tuzilma turli lingvistik
+				xususiyatlarni parallel o'rganishga imkon berib, modelning ifodalash quvvatini oshiradi.
 			</p>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 3: Masked Self-Attention</h4>
+			<h4>3-qadam: Masked Self-Attention</h4>
 			<p>
-				In each head, we perform masked self-attention calculations. This mechanism allows the model
-				to generate sequences by focusing on relevant parts of the input while preventing access to
-				future tokens.
+				Har bir head ichida masked self-attention hisoblanadi. Bu mexanizm modelga kirishning
+				kerakli qismlariga e'tibor qaratgan holda ketma-ketlik generatsiya qilish imkonini beradi va
+				ayni paytda kelajakdagi tokenlarga kirishni to'sib qo'yadi.
 			</p>
 
 			<div class="figure">
 				<img src="./article_assets/attention.png" width="80%" align="middle" />
 			</div>
 			<div class="figure-caption">
-				Figure <span class="attention">3</span>. Using Query, Key, and Value matrices to calculate
-				masked self-attention.
+				<span class="attention">3</span>-rasm. Query, Key va Value matritsalari yordamida masked
+				self-attention'ni hisoblash.
 			</div>
 
 			<ul>
 				<li>
-					<strong>Dot Product</strong>: The dot product of
+					<strong>Skalyar ko'paytma (dot product)</strong>:
 					<span class="q-color">Query</span>
-					and <span class="k-color">Key</span> matrices determines the
-					<strong>attention score</strong>, producing a square matrix that reflects the relationship
-					between all input tokens.
+					va <span class="k-color">Key</span> matritsalarining skalyar ko'paytmasi
+					<strong>attention ballini</strong> beradi va barcha kirish tokenlari orasidagi munosabatni
+					aks ettiruvchi kvadrat matritsa hosil qiladi.
 				</li>
 				<li>
-					<strong>Scaling · Mask</strong>: The attention scores are scaled and a mask is applied to
-					the upper triangle of the attention matrix to prevent the model from accessing future
-					tokens, setting these values to negative infinity. The model needs to learn how to predict
-					the next token without “peeking” into the future.
+					<strong>Masshtablash · Mask</strong>: attention ballari masshtablanadi va attention
+					matritsasining yuqori uchburchagiga mask qo'llanadi — bu qiymatlar manfiy cheksizlikka
+					tenglashtiriladi, shunda model kelajakdagi tokenlarni ko'ra olmaydi. Model keyingi tokenni
+					"kelajakka qaramasdan" bashorat qilishni o'rganishi kerak.
 				</li>
 				<li>
-					<strong>Softmax · Dropout</strong>: After masking and scaling, the attention scores are
-					converted into probabilities by the softmax operation, then optionally regularized with
-					dropout. Each row of the matrix sums to one and indicates the relevance of every other
-					token to the left of it.
+					<strong>Softmax · Dropout</strong>: mask va masshtablashdan so'ng attention ballari softmax
+					operatsiyasi yordamida ehtimolliklarga aylantiriladi, so'ng ixtiyoriy ravishda dropout
+					bilan regularizatsiya qilinadi. Matritsaning har bir qatori yig'indisi birga teng bo'ladi va
+					undan chapdagi har bir tokenning qanchalik muhimligini ko'rsatadi.
 				</li>
 			</ul>
 		</div>
 		<div class="article-subsection-l2">
-			<h4>Step 4: Output and Concatenation</h4>
+			<h4>4-qadam: Chiqish va birlashtirish</h4>
 			<p>
-				The model uses the masked self-attention scores and multiplies them with the
-				<span class="v-color">Value</span> matrix to get the
-				<span class="purple-color">final output</span>
-				of the self-attention mechanism. GPT-2 has <code>12</code> self-attention heads, each capturing
-				different relationships between tokens. The outputs of these heads are concatenated and passed
-				through a linear projection.
+				Model masked self-attention ballarini
+				<span class="v-color">Value</span> matritsasiga ko'paytiradi va self-attention mexanizmining
+				<span class="purple-color">yakuniy chiqishini</span>
+				oladi. GPT-2 da <code>12</code> ta self-attention head bor va har biri tokenlar orasidagi turli
+				munosabatlarni ushlaydi. Bu head'larning chiqishlari birlashtiriladi (concatenate) va chiziqli
+				proyeksiyadan o'tkaziladi.
 			</p>
 		</div>
 	</div>
@@ -344,230 +348,217 @@
 			<img src="./article_assets/mlp.png" width="70%" align="middle" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">4</span>. Using MLP layer to project the self-attention
-			representations into higher dimensions to enhance the model's representational capacity.
+			<span class="attention">4</span>-rasm. MLP qatlami self-attention ko'rinishlarini yuqoriroq
+			o'lchamga proyeksiya qilib, modelning ifodalash quvvatini oshiradi.
 		</div>
 
 		<p>
-			After the multiple heads of self-attention capture the diverse relationships between the input
-			tokens, the concatenated outputs are passed through the Multilayer Perceptron (MLP) layer to
-			enhance the model's representational capacity. The MLP block consists of two linear
-			transformations with a <a
+			Self-attention head'lari kirish tokenlari orasidagi turli munosabatlarni ushlab olgach,
+			birlashtirilgan chiqishlar Multilayer Perceptron (MLP) qatlamiga uzatiladi — bu modelning
+			ifodalash quvvatini oshiradi. MLP bloki ikkita chiziqli o'zgartirish va ular orasidagi
+			<a
 				href="https://en.wikipedia.org/wiki/Rectified_linear_unit#Gaussian-error_linear_unit_(GELU)"
 				>GELU</a
-			> activation function in between.
+			> aktivatsiya funksiyasidan iborat.
 		</p>
 		<p>
-			The first linear transformation expands the dimensionality of the input four-fold from <code
-				>768</code
-			>
-			to
-			<code>3072</code>. This expansion step allows the model to project the token representations
-			into a higher-dimensional space, where it can capture richer and more complex patterns that
-			may not be visible in the original dimension.
+			Birinchi chiziqli o'zgartirish kirish o'lchamini to'rt barobar kengaytiradi: <code>768</code>
+			dan
+			<code>3072</code> gacha. Bu kengaytirish qadami modelga token ko'rinishlarini yuqoriroq o'lchamli
+			fazoga proyeksiya qilish imkonini beradi; o'sha fazoda dastlabki o'lchamda ko'rinmaydigan boyroq
+			va murakkabroq naqshlarni ushlash mumkin.
 		</p>
 		<p>
-			The second linear transformation then reduces the dimensionality back to the original size of <code
-				>768</code
-			>.This compression step brings the representations back to a manageable size while retaining
-			the useful nonlinear transformations introduced in the expansion step.
+			Ikkinchi chiziqli o'zgartirish esa o'lchamni yana dastlabki <code>768</code> ga qaytaradi. Bu
+			siqish qadami ko'rinishlarni boshqarish qulay bo'lgan hajmga qaytaradi, ammo kengaytirish
+			bosqichida kiritilgan foydali nochiziqli o'zgarishlarni saqlab qoladi.
 		</p>
 		<p>
-			Unlike the self-attention mechanism, which integrates information across tokens, the MLP
-			processes tokens independently and simply maps each token representation from one space to
-			another, enriching the overall model capacity.
+			Tokenlar orasida ma'lumot almashadigan self-attention'dan farqli o'laroq, MLP har bir tokenni
+			mustaqil qayta ishlaydi va shunchaki har bir token ko'rinishini bir fazodan boshqasiga
+			o'tkazadi — bu esa modelning umumiy quvvatini boyitadi.
 		</p>
 	</div>
 
 	<div class="article-section" id="article-prob" data-click="article-prob">
-		<h2>Output Probabilities</h2>
+		<h2>Chiqish ehtimolliklari</h2>
 		<p>
-			After the input has been processed through all Transformer blocks, the output is passed
-			through the final linear layer to prepare it for token prediction. This layer projects the
-			final representations into a <code>50,257</code>
-			dimensional space, where every token in the vocabulary has a corresponding value called
-			<code>logit</code>. Any token can be the next word, so this process allows us to simply rank
-			these tokens by their likelihood of being that next word. We then apply the softmax function
-			to convert the logits into a probability distribution that sums to one. This will allow us to
-			sample the next token based on its likelihood.
+			Kirish barcha Transformer bloklaridan o'tgach, natija token bashoratiga tayyorlash uchun
+			oxirgi linear qatlamga uzatiladi. Bu qatlam yakuniy ko'rinishlarni <code>50,257</code>
+			o'lchamli fazoga proyeksiya qiladi; unda lug'atdagi har bir tokenga
+			<code>logit</code> deb ataluvchi qiymat to'g'ri keladi. Keyingi so'z har qanday token bo'lishi
+			mumkin, shuning uchun bu jarayon tokenlarni keyingi so'z bo'lish ehtimoli bo'yicha saralash
+			imkonini beradi. So'ngra logit'larni yig'indisi birga teng bo'lgan ehtimollik taqsimotiga
+			aylantirish uchun softmax funksiyasini qo'llaymiz. Shundan keyin keyingi tokenni uning ehtimoli
+			asosida tanlab olishimiz (sampling) mumkin.
 		</p>
 
 		<div class="figure py-5">
 			<img src="./article_assets/softmax.png" width="70%" />
 		</div>
 		<div class="figure-caption">
-			Figure <span class="attention">5</span>. Each token in the vocabulary is assigned a
-			probability based on the model's output logits. These probabilities determine the likelihood
-			of each token being the next word in the sequence.
+			<span class="attention">5</span>-rasm. Lug'atdagi har bir tokenga modelning chiqish logit'lari
+			asosida ehtimollik beriladi. Bu ehtimolliklar har bir tokenning ketma-ketlikdagi keyingi so'z
+			bo'lish imkoniyatini belgilaydi.
 		</div>
 
 		<p id="article-temperature" data-click="article-temperature">
-			The final step is to generate the next token by sampling from this distribution The <code
-				>temperature</code
-			>
-			hyperparameter plays a critical role in this process. Mathematically speaking, it is a very simple
-			operation: model output logits are simply divided by the
-			<code>temperature</code>:
+			Oxirgi qadam — shu taqsimotdan tanlab olish (sampling) orqali keyingi tokenni generatsiya
+			qilish. Bu jarayonda <code>temperature</code> giperparametri hal qiluvchi rol o'ynaydi.
+			Matematik jihatdan bu juda oddiy amal: modelning chiqish logit'lari shunchaki
+			<code>temperature</code> ga bo'linadi:
 		</p>
 
 		<ul>
 			<li>
-				<code>temperature = 1</code>: Dividing logits by one has no effect on the softmax outputs.
+				<code>temperature = 1</code>: logit'larni birga bo'lish softmax natijasiga hech qanday ta'sir
+				qilmaydi.
 			</li>
 			<li>
-				<code>temperature &lt; 1</code>: Lower temperature makes the model more confident and
-				deterministic by sharpening the probability distribution, leading to more predictable
-				outputs.
+				<code>temperature &lt; 1</code>: past temperature ehtimollik taqsimotini o'tkirlashtiradi,
+				natijada model o'ziga ishonchliroq va deterministikroq bo'ladi — chiqish matni oldindan
+				aytish osonroq bo'ladi.
 			</li>
 			<li>
-				<code>temperature &gt; 1</code>: Higher temperature creates a softer probability
-				distribution, allowing for more randomness in the generated text – what some refer to as
-				model <em>“creativity”</em>.
+				<code>temperature &gt; 1</code>: yuqori temperature taqsimotni yumshatadi va generatsiya
+				qilingan matnda tasodifiylikni oshiradi — ba'zilar buni modelning
+				<em>"ijodkorligi"</em> deb ataydi.
 			</li>
 		</ul>
 
 		<p id="article-sampling" data-click="article-sampling">
-			In addition, the sampling process can be further refined using <code>top-k</code>
-			and
-			<code>top-p</code> parameters:
+			Bundan tashqari, sampling jarayonini <code>top-k</code>
+			va
+			<code>top-p</code> parametrlari bilan yanada nozik sozlash mumkin:
 		</p>
 		<ul>
 			<li>
-				<code>top-k sampling</code>: Limits the candidate tokens to the top k tokens with the
-				highest probabilities, filtering out less likely options.
+				<code>top-k sampling</code>: nomzod tokenlarni eng yuqori ehtimollikka ega k ta token bilan
+				cheklaydi va ehtimoli past variantlarni chetlab o'tadi.
 			</li>
 			<li>
-				<code>top-p sampling</code>: Considers the smallest set of tokens whose cumulative
-				probability exceeds a threshold p, ensuring that only the most likely tokens contribute
-				while still allowing for diversity.
+				<code>top-p sampling</code>: yig'indi ehtimoli p chegarasidan oshadigan eng kichik token
+				to'plamini oladi — shunda faqat eng ehtimolli tokenlar ishtirok etadi, ammo xilma-xillik ham
+				saqlanadi.
 			</li>
 		</ul>
 		<p>
-			By tuning <code>temperature</code>, <code>top-k</code>, and <code>top-p</code>, you can
-			balance between deterministic and diverse outputs, tailoring the model's behavior to your
-			specific needs.
+			<code>temperature</code>, <code>top-k</code> va <code>top-p</code> ni sozlash orqali
+			deterministik va xilma-xil natijalar o'rtasida muvozanat topishingiz va model xatti-harakatini
+			o'z ehtiyojingizga moslashtirishingiz mumkin.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-advanced-features">
-		<h2>Auxiliary Architectural Features</h2>
+		<h2>Yordamchi arxitektura elementlari</h2>
 
 		<p>
-			There are several auxiliary architectural features that enhance the performance of Transformer
-			models. While important for the model's overall performance, they are not as important for
-			understanding the core concepts of the architecture. Layer Normalization, Dropout, and
-			Residual Connections are crucial components in Transformer models, particularly during the
-			training phase. Layer Normalization stabilizes training and helps the model converge faster.
-			Dropout prevents overfitting by randomly deactivating neurons. Residual Connections allows
-			gradients to flow directly through the network and helps to prevent the vanishing gradient
-			problem.
+			Transformer modellari samaradorligini oshiruvchi bir nechta yordamchi arxitektura elementlari
+			bor. Ular modelning umumiy ishlashi uchun muhim bo'lsa-da, arxitekturaning asosiy g'oyalarini
+			tushunish uchun unchalik hal qiluvchi emas. Layer Normalization, Dropout va Residual
+			Connection — Transformer modellarida, ayniqsa o'qitish bosqichida, muhim komponentlar. Layer
+			Normalization o'qitishni barqarorlashtiradi va modelning tezroq yaqinlashishiga (convergence)
+			yordam beradi. Dropout neyronlarni tasodifiy o'chirib turish orqali overfitting'ning oldini
+			oladi. Residual Connection esa gradientlarning tarmoq bo'ylab to'g'ridan-to'g'ri oqishiga imkon
+			berib, yo'qolayotgan gradient (vanishing gradient) muammosini yumshatadi.
 		</p>
 		<div class="article-subsection" id="article-ln">
 			<h3>Layer Normalization</h3>
 
 			<p>
-				Layer Normalization helps to stabilize the training process and improves convergence. It
-				works by normalizing the inputs across the features, ensuring that the mean and variance of
-				the activations are consistent. This normalization helps mitigate issues related to internal
-				covariate shift, allowing the model to learn more effectively and reducing the sensitivity
-				to the initial weights. Layer Normalization is applied twice in each Transformer block, once
-				before the self-attention mechanism and once before the MLP layer.
+				Layer Normalization o'qitish jarayonini barqarorlashtiradi va yaqinlashishni yaxshilaydi. U
+				kirishlarni xususiyatlar bo'ylab normallashtirib, aktivatsiyalarning o'rtacha qiymati va
+				dispersiyasini bir tekisda ushlab turadi. Bu normallashtirish ichki kovariativ siljish
+				(internal covariate shift) bilan bog'liq muammolarni yumshatadi, model samaraliroq
+				o'rganadi va boshlang'ich og'irliklarga bog'liqlik kamayadi. Layer Normalization har bir
+				Transformer blokida ikki marta qo'llanadi: bir marta self-attention mexanizmidan oldin va
+				bir marta MLP qatlamidan oldin.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-dropout">
 			<h3>Dropout</h3>
 
 			<p>
-				Dropout is a regularization technique used to prevent overfitting in neural networks by
-				randomly setting a fraction of model weights to zero during training. This encourages the
-				model to learn more robust features and reduces dependency on specific neurons, helping the
-				network generalize better to new, unseen data. During model inference, dropout is
-				deactivated. This essentially means that we are using an ensemble of the trained
-				subnetworks, which leads to a better model performance.
+				Dropout — neyron tarmoqlarda overfitting'ning oldini olish uchun ishlatiladigan
+				regularizatsiya usuli: o'qitish davomida model og'irliklarining bir qismi tasodifiy nolga
+				tenglashtiriladi. Bu modelni yanada barqaror xususiyatlarni o'rganishga undaydi, ayrim
+				neyronlarga bog'lanib qolishini kamaytiradi va tarmoqning yangi, ko'rilmagan ma'lumotlarga
+				umumlashtirish qobiliyatini oshiradi. Model inference paytida dropout o'chiriladi. Mohiyatan
+				bu o'qitilgan kichik tarmoqlar ansamblidan (ensemble) foydalanish demak — natijada model
+				yaxshiroq ishlaydi.
 			</p>
 		</div>
 		<div class="article-subsection" id="article-residual">
-			<h3>Residual Connections</h3>
+			<h3>Residual Connection</h3>
 
 			<p>
-				Residual connections were first introduced in the ResNet model in 2015. This architectural
-				innovation revolutionized deep learning by enabling the training of very deep neural
-				networks. Essentially, residual connections are shortcuts that bypass one or more layers,
-				adding the input of a layer to its output. This helps mitigate the vanishing gradient
-				problem, making it easier to train deep networks with multiple Transformer blocks stacked on
-				top of each other. In GPT-2, residual connections are used twice within each Transformer
-				block: once before the MLP and once after, ensuring that gradients flow more easily, and
-				earlier layers receive sufficient updates during backpropagation.
+				Residual connection birinchi marta 2015-yilda ResNet modelida taqdim etilgan. Bu arxitektura
+				yangiligi juda chuqur neyron tarmoqlarni o'qitish imkonini berib, chuqur o'rganish sohasini
+				tubdan o'zgartirdi. Mohiyatan residual connection — bir yoki bir nechta qatlamni chetlab
+				o'tuvchi "qisqa yo'l": qatlamning kirishi uning chiqishiga qo'shib yuboriladi. Bu
+				yo'qolayotgan gradient muammosini yumshatadi va bir-birining ustiga taxlangan ko'plab
+				Transformer bloklaridan iborat chuqur tarmoqlarni o'qitishni osonlashtiradi. GPT-2 da
+				residual connection har bir Transformer bloki ichida ikki marta ishlatiladi: bir marta MLP
+				dan oldin va bir marta undan keyin — shunda gradientlar erkinroq oqadi va dastlabki
+				qatlamlar backpropagation davomida yetarli yangilanish oladi.
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" data-click="article-interactive-features">
-		<h1>Interactive Features</h1>
+		<h1>Interaktiv imkoniyatlar</h1>
 		<p>
-			Transformer Explainer is built to be interactive and allows you to explore the inner workings
-			of the Transformer. Here are some of the interactive features you can play with:
+			Transformer Explainer interaktiv bo'lib qurilgan va Transformer'ning ichki ishlashini
+			o'rganishga imkon beradi. Mana siz sinab ko'rishingiz mumkin bo'lgan imkoniyatlar:
 		</p>
 
 		<ul>
 			<li>
-				<strong>Input your own text sequence</strong> to see how the model processes it and predicts
-				the next word. Explore attention weights, intermediate computations, and see how the final output
-				probabilities are calculated.
+				<strong>O'z matningizni kiriting</strong> va model uni qanday qayta ishlashini hamda keyingi
+				so'zni qanday bashorat qilishini kuzating. Attention og'irliklarini, oraliq hisoblarni va
+				yakuniy chiqish ehtimolliklari qanday hisoblanishini ko'ring.
 			</li>
 			<li>
-				<strong>Use temperature slider</strong> to control the randomness of the model’s predictions.
-				Explore how you can make the model output more deterministic or more creative by changing the
-				temperature value.
+				<strong>Temperature slayderidan foydalaning</strong> va model bashoratlarining tasodifiylik
+				darajasini boshqaring. Temperature qiymatini o'zgartirib, model chiqishini qanday qilib
+				deterministikroq yoki ijodkorroq qilish mumkinligini ko'ring.
 			</li>
 			<li>
-				<strong>Select top-k and top-p sampling methods</strong> to adjust sampling behavior during inference.
-				Experiment with different values and see how the probability distribution changes and influences
-				the model's predictions.
+				<strong>top-k va top-p sampling usullarini tanlang</strong> va inference davomida sampling
+				xatti-harakatini sozlang. Turli qiymatlarni sinab ko'ring va ehtimollik taqsimoti qanday
+				o'zgarishini hamda bu model bashoratlariga qanday ta'sir qilishini kuzating.
 			</li>
 			<li>
-				<strong>Interact with attention maps</strong> to see how the model focuses on different tokens
-				in the input sequence. Hover over tokens to highlight their attention weights and explore how
-				the model captures context and relationships between words.
+				<strong>Attention xaritalari bilan ishlang</strong> va modelning kirish ketma-ketligidagi
+				turli tokenlarga qanday e'tibor qaratishini ko'ring. Tokenlar ustiga sichqonchani olib
+				borib, ularning attention og'irliklarini yoriting va model kontekst hamda so'zlar orasidagi
+				munosabatlarni qanday ushlab olishini o'rganing.
 			</li>
 		</ul>
 	</div>
 
-	<div class="article-section" data-click="article-video">
-		<h2>Video Tutorial</h2>
-		<div class="video-container">
-			<iframe
-				src="https://www.youtube.com/embed/ECR4oAwocjs"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			>
-			</iframe>
-		</div>
-	</div>
-
 	<div class="article-section" data-click="article-implementation">
-		<h2>How is Transformer Explainer Implemented?</h2>
+		<h2>Transformer Explainer qanday qurilgan?</h2>
 		<p>
-			Transformer Explainer features a live GPT-2 (small) model running directly in the browser.
-			This model is derived from the PyTorch implementation of GPT by Andrej Karpathy's
+			Transformer Explainer'da GPT-2 (small) modeli to'g'ridan-to'g'ri brauzerda, jonli ishlaydi. Bu
+			model Andrej Karpathy ning
 			<a href="https://github.com/karpathy/nanoGPT" title="Github" target="_blank"
-				>nanoGPT project</a
+				>nanoGPT loyihasidagi</a
 			>
-			and has been converted to
+			GPT ning PyTorch implementatsiyasidan olingan va brauzerda muammosiz ishlashi uchun
 			<a href="https://onnxruntime.ai/" title="ONNX" target="_blank">ONNX Runtime</a>
-			for seamless in-browser execution. The interface is built using JavaScript, with
-			<a href="https://kit.svelte.dev/" title="Svelte" target="_blank">Svelte</a>
-			as a front-end framework and
+			formatiga o'tkazilgan. Interfeys JavaScript da yozilgan: front-end freymvork sifatida
+			<a href="https://kit.svelte.dev/" title="Svelte" target="_blank">Svelte</a>, dinamik
+			vizualizatsiyalar uchun esa
 			<a href="https://d3js.org/" title="D3" target="_blank">D3.js</a>
-			for creating dynamic visualizations. Numerical values are updated live following the user input.
+			ishlatilgan. Raqamli qiymatlar foydalanuvchi kiritgan matnga qarab jonli yangilanib turadi.
 		</p>
 	</div>
 
 	<div class="article-section" data-click="article-credit">
-		<h2>Who developed the Transformer Explainer?</h2>
+		<h2>Transformer Explainer'ni kim yaratgan?</h2>
 		<p>
-			Transformer Explainer was created by
+			Transformer Explainer'ni Georgia Institute of Technology da
 
 			<a href="https://aereeeee.github.io/" target="_blank">Aeree Cho</a>,
 			<a href="https://www.linkedin.com/in/chaeyeonggracekim/" target="_blank">Grace C. Kim</a>,
@@ -575,10 +566,15 @@
 			<a href="https://alechelbling.com/" target="_blank">Alec Helbling</a>,
 			<a href="https://zijie.wang/" target="_blank">Jay Wang</a>,
 			<a href="https://seongmin.xyz/" target="_blank">Seongmin Lee</a>,
-			<a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a>, and
+			<a href="https://bhoov.com/" target="_blank">Benjamin Hoover</a> va
 			<a href="https://poloclub.github.io/polochau/" target="_blank">Polo Chau</a>
 
-			at the Georgia Institute of Technology.
+			yaratgan.
+		</p>
+		<p>
+			Ushbu o'zbekcha versiya — asl loyihaning tarjimasi va kengaytmasi.
+			<a href="https://github.com/uzbtrust/NLP-Teacher" target="_blank">NLP Teacher</a> loyihasi doirasida
+			tayyorlangan.
 		</p>
 	</div>
 </div>
