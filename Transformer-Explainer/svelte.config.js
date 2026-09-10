@@ -28,7 +28,14 @@ const config = {
 				'/darslik/pre-ln',
 				'/darslik/swiglu',
 				'/darslik/rope',
-				'/darslik/blok'
+				'/darslik/blok',
+				'/darslik/kv-cache',
+				'/darslik/gqa',
+				'/darslik/mla',
+				'/darslik/flash-attention',
+				'/darslik/paged-attention',
+				'/darslik/speculative',
+				'/darslik/quantization'
 			]
 		},
 		alias: {

@@ -1,53 +1,56 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { QISM, modullar } from '~/lib/darslik/modullar';
+	import { qismlar } from '~/lib/darslik/modullar';
 </script>
 
 <svelte:head>
-	<title>Darslik — Blokni qayta qurish | Transformer Explainer</title>
+	<title>Darslik | Transformer Explainer</title>
 	<meta
 		name="description"
-		content="GPT-2 blokidan zamonaviy blokka: RMSNorm, Pre-LN, SwiGLU va RoPE — har biri interaktiv demo bilan."
+		content="GPT-2 blokidan zamonaviy modelgacha: RMSNorm, Pre-LN, SwiGLU, RoPE, KV cache, GQA, MLA, FlashAttention va boshqalar - har biri interaktiv demo bilan."
 	/>
 </svelte:head>
 
 <div class="darslik-index">
 	<header>
 		<p class="eyebrow">Darslik</p>
-		<h1>Zamonaviy blok<br />qanday yig'ilgan</h1>
+		<h1>Zamonaviy model<br />qanday yig'ilgan</h1>
 		<p class="lead">
-			Bosh sahifadagi model — GPT-2 (2019). Uning arxitekturasi bugungi modellarda ham o'sha:
-			attention, FFN, residual. Lekin blok <em>ichidagi</em> deyarli har bir qism almashtirilgan.
-			Bu bo'limda o'sha almashtirishlarni birma-bir, ixtiro qilingan tartibda ko'ramiz.
+			Bosh sahifadagi model - GPT-2 (2019). Uning arxitekturasi bugungi modellarda ham o'sha:
+			attention, FFN, residual. Lekin blok <em>ichidagi</em> deyarli har bir qism almashtirilgan,
+			va uni ishlatish usuli butunlay boshqacha. Bu bo'limda o'sha o'zgarishlarni birma-bir,
+			ixtiro qilingan tartibda ko'ramiz.
 		</p>
 	</header>
 
-	<section class="qism">
-		<div class="qism-head">
-			<span class="qism-raqam">{QISM.raqam}</span>
-			<div>
-				<h2>{QISM.title}</h2>
-				<p>{QISM.tagline}</p>
+	{#each qismlar as q (q.raqam)}
+		<section class="qism">
+			<div class="qism-head">
+				<span class="qism-raqam">{q.raqam}</span>
+				<div>
+					<h2>{q.title} <span class="qism-yil">{q.yillar}</span></h2>
+					<p>{q.tagline}</p>
+				</div>
 			</div>
-		</div>
 
-		<ol class="modul-list">
-			{#each modullar as m (m.slug)}
-				<li>
-					<a href="{base}/darslik/{m.slug}">
-						<span class="raqam">{m.raqam}</span>
-						<span class="matn">
-							<span class="nom">{m.title}</span>
-							<span class="tagline">{m.tagline}</span>
-						</span>
-						<span class="yil">{m.yil}</span>
-					</a>
-				</li>
-			{/each}
-		</ol>
-	</section>
+			<ol class="modul-list">
+				{#each q.modullar as m (m.slug)}
+					<li>
+						<a href="{base}/darslik/{m.slug}">
+							<span class="raqam">{m.raqam}</span>
+							<span class="matn">
+								<span class="nom">{m.title}</span>
+								<span class="tagline">{m.tagline}</span>
+							</span>
+							<span class="yil">{m.yil}</span>
+						</a>
+					</li>
+				{/each}
+			</ol>
+		</section>
+	{/each}
 
-	<p class="qaytish"><a href="{base}/">← Jonli GPT-2 modeliga qaytish</a></p>
+	<p class="qaytish"><a href="{base}/">&larr; Jonli GPT-2 modeliga qaytish</a></p>
 </div>
 
 <style lang="scss">
@@ -89,7 +92,7 @@
 	}
 
 	.qism {
-		margin-top: 4rem;
+		margin-top: 3.5rem;
 		border-top: 1px solid theme('colors.gray.200');
 		padding-top: 2.5rem;
 	}
@@ -105,6 +108,18 @@
 			font-size: 1.5rem;
 			font-weight: 600;
 			color: theme('colors.gray.800');
+			display: flex;
+			align-items: baseline;
+			gap: 0.7rem;
+			flex-wrap: wrap;
+		}
+
+		.qism-yil {
+			font-family: theme('fontFamily.mono');
+			font-size: 0.8rem;
+			font-weight: 400;
+			color: theme('colors.gray.400');
+			font-variant-numeric: tabular-nums;
 		}
 
 		p {

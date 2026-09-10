@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { QISM, modulTop, qoshni } from '~/lib/darslik/modullar';
+	import { modulTop, qismTop, qoshni } from '~/lib/darslik/modullar';
 
 	export let slug: string;
 
 	$: modul = modulTop(slug);
+	$: qism = qismTop(slug);
 	$: nav = qoshni(slug);
 </script>
 
 <article class="modul">
 	<header>
 		<p class="eyebrow">
-			<span class="qism">{QISM.raqam}</span>
-			{QISM.title}
+			<span class="qism">{qism?.raqam}</span>
+			{qism?.title}
 			<span class="dot">·</span>
 			<span class="raqam">{modul?.raqam}</span>
 			<span class="yil">{modul?.yil}</span>
