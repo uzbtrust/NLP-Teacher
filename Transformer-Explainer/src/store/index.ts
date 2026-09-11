@@ -1,11 +1,7 @@
 import { writable, derived, readable } from 'svelte/store';
-import * as ort from 'onnxruntime-web';
-import tailwindConfig from '../../tailwind.config';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import { ex0 } from '~/constants/examples';
-import { textPages } from '~/utils/textbookPages';
-
-const { theme } = resolveConfig(tailwindConfig);
+// Faqat tip sifatida kerak. `import type` bo'lmasa onnxruntime-web butun ilovaga
+// (jumladan /darslik sahifalariga) runtime dependency sifatida tortiladi.
+import type * as ort from 'onnxruntime-web';
 
 export const attentionHeadIdxTemp = writable(0);
 export const attentionHeadIdx = writable(0);
@@ -18,7 +14,11 @@ export const isOnAnimation = writable(false);
 // Textbook state management
 export const textbookCurrentPage = writable<number>(0);
 export const textbookPreviousPage = writable<number>(-1);
-export const textbookCurrentPageId = writable<string>(textPages[0].id);
+// textPages[0].id ning qiymati. Ilgari bu yerda textbookPages import qilinardi va u
+// orqali animation.ts -> gsap + d3 + tailwind.config + flowbite/plugin butun zanjiri
+// har bir sahifaga (jumladan /darslik ga) tushardi. Bitta satr uchun.
+// Ayni paytda bu store <-> textbookPages <-> animation halqasini ham uzadi.
+export const textbookCurrentPageId = writable<string>('what-is-transformer');
 export const textbookPreviousPageId = writable<string>('');
 export const isTextbookOpen = writable<boolean>(true);
 
@@ -41,10 +41,13 @@ export const selectedExampleIdx = writable<number>(initialExIdx);
 export const modelSession = writable<ort.InferenceSession>();
 
 // transformer model output
-export const modelData = writable<ModelData>(ex0);
+// Ilgari bu yerda namuna ma'lumoti (1.6 MB oldindan hisoblangan GPT-2 chiqishi)
+// boshlang'ich qiymat edi - va u store orqali HAR BIR sahifaga, jumladan /darslik ga
+// ham tushardi. Endi uni explorer sahifasi (+page.svelte) modul darajasida o'rnatadi.
+export const modelData = writable<ModelData>(undefined);
 export const predictedToken = writable<Probability>();
-export const tokens = writable<string[]>(ex0?.tokens);
-export const tokenIds = writable<number[]>(ex0?.tokenIds);
+export const tokens = writable<string[]>(undefined);
+export const tokenIds = writable<number[]>(undefined);
 
 export const modelMetaMap: Record<string, ModelMetaData> = {
 	gpt2: { layer_num: 12, attention_head_num: 12, dimension: 768, chunkTotal: 63 },
@@ -101,7 +104,10 @@ export const headGap = { x: 5, y: 8, scale: 0 };
 
 export const isBoundingBoxActive = writable(false);
 
-export const predictedColor = theme.colors.purple[600];
+// theme.colors.purple[600] (flowbite palitrasi). Ilgari bu qiymat brauzerda
+// resolveConfig(tailwind.config) orqali olinardi - va u bilan birga tailwindcss
+// hamda flowbite/plugin butun client bundle'ga tushardi. Bitta rang uchun.
+export const predictedColor = '#7E3AF2';
 
 // Interactivity
 export const hoveredPath = writable();

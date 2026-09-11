@@ -19,7 +19,8 @@
 		isOnBlockTransition,
 		blockIdx,
 		isTextbookOpen,
-		userId
+		userId,
+		tokenIds
 	} from '~/store';
 	import { PreTrainedTokenizer } from '@xenova/transformers';
 	import Sankey from '~/components/Sankey.svelte';
@@ -99,6 +100,13 @@
 	};
 
 	// Subscribe inputs
+	// Store endi namuna ma'lumotini o'zi import qilmaydi (1.6 MB, har bir sahifaga
+	// tushardi). Boshlang'ich holatni explorer sahifasining o'zi - bola komponentlar
+	// render bo'lishidan oldin, modul darajasida - o'rnatadi. Ko'rinish o'zgarmaydi.
+	modelData.set(ex0);
+	tokens.set(ex0?.tokens);
+	tokenIds.set(ex0?.tokenIds);
+
 	const cachedDataMap = [ex0, ex1, ex2, ex3, ex4];
 	const subscribeInputs = (tokenizer: PreTrainedTokenizer) => {
 		const runModelOrCache = () => {
